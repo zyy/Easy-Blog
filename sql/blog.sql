@@ -41,7 +41,7 @@ CREATE TABLE `category` (
 `name` varchar(100) NULL COMMENT '名称',
 PRIMARY KEY (`id`) )COMMENT='分类';
 
-CREATE TABLE `post_tag` (
+CREATE TABLE `posttag` (
 `id` int(10) NULL AUTO_INCREMENT COMMENT 'ID',
 `post_id` int(10) NULL COMMENT '文章',
 `tag_id` int(10) NULL COMMENT '标签',
