@@ -5,45 +5,33 @@ import java.util.Properties;
 
 import cn.easy.blog.controller.IndexController;
 import cn.easy.blog.controller.LoginController;
-import cn.easy.blog.interceptor.LoginInterceptor;
+import cn.easy.blog.controller.PostController;
 import cn.easy.blog.model.Category;
 import cn.easy.blog.model.Comment;
 import cn.easy.blog.model.Post;
 import cn.easy.blog.model.PostTag;
 import cn.easy.blog.model.Tag;
 import cn.easy.blog.model.User;
-import cn.easy.config.Constants;
-import cn.easy.config.EasyConfig;
-import cn.easy.config.Handlers;
-import cn.easy.config.Interceptors;
-import cn.easy.config.Plugins;
-import cn.easy.config.Routes;
-import cn.easy.core.EasyFramework;
-import cn.easy.plugin.activerecord.ActiveRecordPlugin;
-import cn.easy.plugin.activerecord.dialect.MysqlDialect;
-import cn.easy.plugin.c3p0.C3p0Plugin;
-import cn.easy.render.FreeMarkerRender;
-import freemarker.template.Configuration;
-import freemarker.template.TemplateModelException;
 
-public class BlogConfig extends EasyConfig {
+import com.jfinal.config.Constants;
+import com.jfinal.config.Handlers;
+import com.jfinal.config.Interceptors;
+import com.jfinal.config.JFinalConfig;
+import com.jfinal.config.Plugins;
+import com.jfinal.config.Routes;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
+import com.jfinal.plugin.c3p0.C3p0Plugin;
+
+public class BlogConfig extends JFinalConfig {
 	public void configConstant(Constants constants) {
 		constants.setDevMode(true);
-		constants.setBaseViewPath("/WEB-INF/freemarker");
-
-		Configuration freeMarkerConfig = FreeMarkerRender.getConfiguration();
-		try {
-			// 将contentPath设置为freemarker共享变量
-			freeMarkerConfig.setSharedVariable("ctx", EasyFramework
-					.getInstance().getServletContext().getContextPath());
-		} catch (TemplateModelException e) {
-			throw new IllegalStateException(e);
-		}
 	}
 
 	public void configRoute(Routes routes) {
-		routes.add("/", IndexController.class);
-		routes.add("/login", LoginController.class);
+		routes.add("/", IndexController.class, "/index");
+		routes.add("/login", LoginController.class, "/login");
+		routes.add("/post", PostController.class, "/post");
 	}
 
 	public void configPlugin(Plugins plugins) {
@@ -57,19 +45,21 @@ public class BlogConfig extends EasyConfig {
 		aPlugin.setDialect(new MysqlDialect());
 		plugins.add(aPlugin);
 
-		aPlugin.addMapping("Category", Category.class);
-		aPlugin.addMapping("Comment", Comment.class);
-		aPlugin.addMapping("Post", Post.class);
-		aPlugin.addMapping("PostTag", PostTag.class);
-		aPlugin.addMapping("Tag", Tag.class);
-		aPlugin.addMapping("User", User.class);
+		aPlugin.addMapping("category", Category.class);
+		aPlugin.addMapping("comment", Comment.class);
+		aPlugin.addMapping("post", Post.class);
+		aPlugin.addMapping("posttag", PostTag.class);
+		aPlugin.addMapping("tag", Tag.class);
+		aPlugin.addMapping("user", User.class);
 	}
 
 	public void configInterceptor(Interceptors interceptors) {
-		interceptors.add(new LoginInterceptor());
+		//interceptors.add(new SessionInViewInterceptor(true));
+		// interceptors.add(new LoginInterceptor());
 	}
 
 	public void configHandler(Handlers handlers) {
+//		handlers.add(new ContextPathHandler("ctx"));
 	}
 
 }

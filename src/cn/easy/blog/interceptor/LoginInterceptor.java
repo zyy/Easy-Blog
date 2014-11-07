@@ -4,11 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.jetty.server.Authentication.User;
 
-import cn.easy.aop.Interceptor;
 import cn.easy.blog.common.WebKeys;
-import cn.easy.core.ActionInvocation;
-import cn.easy.core.Controller;
-import cn.easy.util.StringUtil;
+
+import com.jfinal.aop.Interceptor;
+import com.jfinal.core.ActionInvocation;
+import com.jfinal.core.Controller;
+import com.jfinal.kit.StrKit;
 
 public class LoginInterceptor implements Interceptor {
 
@@ -26,7 +27,7 @@ public class LoginInterceptor implements Interceptor {
 		// 尝试从cookie里找userid
 		String userId = controller.getCookie(WebKeys.COOKIE_USER_ID);
 		User user = null;
-		if (StringUtil.isEmpty(userId)) {
+		if (StrKit.isBlank(userId)) {
 			//user = User.dao.findById(userId);
 		}
 		if (user != null) {
@@ -47,7 +48,7 @@ public class LoginInterceptor implements Interceptor {
 			controller.setSessionAttr(WebKeys.SESSION_REFERER,
 					request.getHeader("Referer"));
 		} else {// 非异步的get请求保存请求地址
-			String queryString = StringUtil.isEmpty(request.getQueryString()) ? ""
+			String queryString = StrKit.isBlank(request.getQueryString()) ? ""
 					: "?" + request.getQueryString();
 			controller.setSessionAttr(WebKeys.SESSION_REFERER,
 					request.getRequestURL() + queryString);

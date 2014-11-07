@@ -17,7 +17,7 @@ package cn.easy.blog.model;
 
 import java.util.List;
 
-import cn.easy.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Model;
 
 public class Tag extends Model<Tag> {
 

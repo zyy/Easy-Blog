@@ -3,7 +3,7 @@ body {
 }
 
 .nav-previous a:hover, .nav-next a:hover, #commentform input#submit, #searchform input[type="submit"], .home_menu_item, .secondary-navigation a:hover, .post-date-ribbon, .currenttext, .pagination a:hover, .readMore a, .mts-subscribe input[type="submit"] {
-    background-color: #EA141F;
+    background-color: #328570;
 }
 
 #tabber .inside li .meta b, footer .widget li a:hover, .fn a, .reply a, #tabber .inside li div.info .entry-title a:hover, #navigation ul ul a:hover, .single_post a, a:hover, .textwidget a, #commentform a, #tabber .inside li a, .copyrights a:hover, a, .sidebar.c-4-12 a:hover, .top a:hover,#logo span {
@@ -11,7 +11,7 @@ body {
 }
 
 .corner {
-    border-color: transparent transparent #EA141F transparent;
+    border-color: transparent transparent #328570 transparent;
 }
 
 .secondary-navigation, footer, .sidebar #searchform input[type="submit"]:hover, .readMore a:hover, #commentform input#submit:hover {
@@ -105,7 +105,7 @@ body {
     line-height: 30px;
     *line-height: 27px;
     text-align: center;
-    background-color: #EA141F
+    background-color: #328570
 }
 
 .rssbutton input:hover {

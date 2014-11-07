@@ -1,0 +1,20 @@
+<header class="main-header">
+	<div class="secondary-navigation">
+		<nav id="navigation">
+			<ul id="menu-main-navigation" class="menu sf-js-enabled">
+				<li
+					class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1305"><a
+					href="/">首页</a>
+				</li> 
+				<#if categorys?? && categorys?size gt 0>
+					<#list categorys as category >
+						<li
+							class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1287">
+							<a href="/post/getPostsByCategory/${category.id}">${category.name}</a>
+						</li> 
+					</#list> 
+				</#if>
+			</ul>
+		</nav>
+	</div>
+</header>

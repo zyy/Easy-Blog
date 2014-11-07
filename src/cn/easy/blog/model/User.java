@@ -15,7 +15,7 @@
  */
 package cn.easy.blog.model;
 
-import cn.easy.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Model;
 
 public class User extends Model<User> {
 

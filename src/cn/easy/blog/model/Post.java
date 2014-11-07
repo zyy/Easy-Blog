@@ -17,7 +17,7 @@ package cn.easy.blog.model;
 
 import java.util.List;
 
-import cn.easy.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Model;
 
 public class Post extends Model<Post> {
 
@@ -28,4 +28,5 @@ public class Post extends Model<Post> {
 		String sql = "select * from post limit 10";
 		return Post.dao.find(sql);
 	}
+	
 }

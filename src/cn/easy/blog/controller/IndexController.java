@@ -15,21 +15,17 @@
  */
 package cn.easy.blog.controller;
 
-import cn.easy.aop.ClearInterceptor;
-import cn.easy.aop.ClearLayer;
 import cn.easy.blog.model.Category;
 import cn.easy.blog.model.Post;
 import cn.easy.blog.model.Tag;
-import cn.easy.core.ActionKey;
-import cn.easy.core.Controller;
+
+import com.jfinal.core.Controller;
 
 public class IndexController extends Controller {
-	@ClearInterceptor(ClearLayer.ALL)
-	@ActionKey("/")
 	public void index() {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		setAttr("posts", Post.dao.getNewest());
 		setAttr("tags", Tag.dao.getAll());
-		render("index.ftl");
+		render("index.html");
 	}
 }

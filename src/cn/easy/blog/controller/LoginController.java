@@ -1,9 +1,9 @@
 package cn.easy.blog.controller;
 
-import cn.easy.aop.ClearInterceptor;
-import cn.easy.aop.ClearLayer;
-import cn.easy.core.ActionKey;
-import cn.easy.core.Controller;
+import com.jfinal.aop.ClearInterceptor;
+import com.jfinal.aop.ClearLayer;
+import com.jfinal.core.ActionKey;
+import com.jfinal.core.Controller;
 
 public class LoginController extends Controller {
 	@ClearInterceptor(ClearLayer.ALL)

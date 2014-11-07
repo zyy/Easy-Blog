@@ -1,0 +1,32 @@
+<#macro layout>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<!--[if IE ]>
+    <script type="text/javascript">alert("抱歉，系统检测到您还在使用低版本IE浏览器，请升级到最新版本或者使用其它浏览器访问。");window.close(); </script>
+<![endif]-->
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="/css/application.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<title>yycoder</title> <#-- base href="${CPATH}" / -->
+</head>
+<body id="blog" class="home blog main cat-32-id cat-80-id">
+	<#include "header.html"/>
+	<div class="main-container">
+		<div id="page">
+			<div class="content">
+				<article class="article"> 
+				<#nested>
+				</article>
+				<aside class="sidebar c-4-12">
+				<div id="sidebars" class="g">
+					<div class="sidebar"><#include "sidebar.html" ></div>
+				</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+	<#include "footer.html"/>
+</body>
+</html>
+</#macro>
