@@ -10,5 +10,6 @@
 </head>
 <body>
 	<@common.topNavbar />
+	<#include "post/posts.ftl" > 
 </body>
 </html>
