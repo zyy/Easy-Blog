@@ -18,6 +18,8 @@ package cn.easy.blog.controller;
 import cn.easy.aop.ClearInterceptor;
 import cn.easy.aop.ClearLayer;
 import cn.easy.blog.model.Category;
+import cn.easy.blog.model.Post;
+import cn.easy.blog.model.Tag;
 import cn.easy.core.ActionKey;
 import cn.easy.core.Controller;
 
@@ -26,6 +28,8 @@ public class IndexController extends Controller {
 	@ActionKey("/")
 	public void index() {
 		setAttr("categorys", Category.dao.getAllCategorys());
+		setAttr("posts", Post.dao.getNewest());
+		setAttr("tags", Tag.dao.getAll());
 		render("index.ftl");
 	}
 }

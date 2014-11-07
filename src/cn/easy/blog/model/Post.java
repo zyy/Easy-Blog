@@ -15,10 +15,17 @@
  */
 package cn.easy.blog.model;
 
+import java.util.List;
+
 import cn.easy.plugin.activerecord.Model;
 
 public class Post extends Model<Post> {
 
 	private static final long serialVersionUID = -1092937447324107462L;
 	public static final Post dao = new Post();
+
+	public List<Post> getNewest() {
+		String sql = "select * from post limit 10";
+		return Post.dao.find(sql);
+	}
 }

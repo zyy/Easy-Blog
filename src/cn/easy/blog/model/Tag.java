@@ -15,10 +15,16 @@
  */
 package cn.easy.blog.model;
 
+import java.util.List;
+
 import cn.easy.plugin.activerecord.Model;
 
 public class Tag extends Model<Tag> {
 
 	private static final long serialVersionUID = 3319600536399303961L;
 	public static final Tag dao = new Tag();
+
+	public List<Tag> getAll() {
+		return Tag.dao.find("select * from tag");
+	}
 }
