@@ -4,7 +4,7 @@
 	<#list posts as post>
 		<div class="post excerpt">
 	        <div class="post-date-ribbon">
-	            <div class="corner"></div>${post.post_date}
+	            <div class="corner"></div>${post.post_date?date}
 	        </div>
 	        <header>
 	            <h2 class="title">
@@ -12,11 +12,11 @@
 	            </h2>
 	            <div class="post-info">
 	            	<div class="author_mt hp_meta">
-	            		<span class="mt_icon"></span>${post.user_id}
+	            		<span class="mt_icon"></span>${post.name}
 	            	</div>
-	            	<div class="cat_mt hp_meta"><span class="mt_icon"></span>${post.category_id}</div>
-	            	<div class="time_mt hp_meta"><span class="time_icon"></span>${post.post_date}</div>
-	            	<div class="view_mt hp_meta"><span class="view_icon"></span>36</div>
+	            	<div class="cat_mt hp_meta"><span class="mt_icon"></span>${post.name}</div>
+	            	<div class="time_mt hp_meta"><span class="time_icon"></span>${post.post_date?date}</div>
+	            	<div class="view_mt hp_meta"><span class="view_icon"></span>${post.views}</div>
 	            </div>
 	        </header>
         	<div class="post-content image-caption-format-1">${post.content}</div>

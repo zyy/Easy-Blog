@@ -6,6 +6,7 @@ import java.util.Properties;
 import cn.easy.blog.controller.IndexController;
 import cn.easy.blog.controller.LoginController;
 import cn.easy.blog.controller.PostController;
+import cn.easy.blog.controller.TagController;
 import cn.easy.blog.model.Category;
 import cn.easy.blog.model.Comment;
 import cn.easy.blog.model.Post;
@@ -32,6 +33,7 @@ public class BlogConfig extends JFinalConfig {
 		routes.add("/", IndexController.class, "/index");
 		routes.add("/login", LoginController.class, "/login");
 		routes.add("/post", PostController.class, "/post");
+		routes.add("/tag", TagController.class, "/tag");
 	}
 
 	public void configPlugin(Plugins plugins) {
@@ -59,7 +61,6 @@ public class BlogConfig extends JFinalConfig {
 	}
 
 	public void configHandler(Handlers handlers) {
-//		handlers.add(new ContextPathHandler("ctx"));
 	}
 
 }

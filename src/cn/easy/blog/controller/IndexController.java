@@ -24,7 +24,7 @@ import com.jfinal.core.Controller;
 public class IndexController extends Controller {
 	public void index() {
 		setAttr("categorys", Category.dao.getAllCategorys());
-		setAttr("posts", Post.dao.getNewest());
+		setAttr("posts", Post.dao.getIndexPosts());
 		setAttr("tags", Tag.dao.getAll());
 		render("index.html");
 	}

@@ -15,10 +15,16 @@
  */
 package cn.easy.blog.model;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Model;
 
 public class PostTag extends Model<PostTag> {
 
 	private static final long serialVersionUID = -159491196000805346L;
 	public static final PostTag dao = new PostTag();
+	
+	public List<PostTag> getPostIdByTagId(String tagId){
+		return PostTag.dao.find("select distinct(post_id) from posttag where tag_id = " + tagId);
+	}
 }

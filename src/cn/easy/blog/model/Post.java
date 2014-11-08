@@ -17,7 +17,9 @@ package cn.easy.blog.model;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Record;
 
 public class Post extends Model<Post> {
 
@@ -28,5 +30,15 @@ public class Post extends Model<Post> {
 		String sql = "select * from post limit 10";
 		return Post.dao.find(sql);
 	}
-	
+
+	public List<Record> getIndexPosts() {
+		List<Record> posts = Db
+				.find("SELECT p.id,p.title,p.content,u.name,p.post_date,p.views "
+						+ "FROM post as p join user as u where p.user_id = u.id limit 10");
+		for (Record post : posts) {
+			System.out.println(">>>>>>>>>>>" + post.toJson());
+		}
+		return posts;
+	}
+
 }

@@ -24,16 +24,18 @@ import com.jfinal.core.Controller;
 public class PostController extends Controller {
 
 	public void postInfo() {
-		setAttr("flag", "post");
-		setAttr("post", Post.dao.findById(getPara()));
+		Post post = Post.dao.findById(getPara());
+		post.set("views", (Integer)post.get("views") + 1);
+		post.update();
+		setAttr("post", post);
 		System.out.println(Post.dao.findById(getPara()).toJson());
 		setAttr("tags", Tag.dao.getAll());
 		setAttr("categorys", Category.dao.getAllCategorys());
+		Post.dao.getIndexPosts();
 		render("post.html");
 	}
 
 	public void getPostsByCategory() {
-		setAttr("flag", "index");
 		setAttr("posts", Post.dao.find("select * from post where category_id = " + getPara()));
 		setAttr("tags", Tag.dao.getAll());
 		setAttr("categorys", Category.dao.getAllCategorys());

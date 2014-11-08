@@ -2,9 +2,8 @@ package cn.easy.blog.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.eclipse.jetty.server.Authentication.User;
-
 import cn.easy.blog.common.WebKeys;
+import cn.easy.blog.model.User;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
@@ -28,7 +27,7 @@ public class LoginInterceptor implements Interceptor {
 		String userId = controller.getCookie(WebKeys.COOKIE_USER_ID);
 		User user = null;
 		if (StrKit.isBlank(userId)) {
-			//user = User.dao.findById(userId);
+			user = User.dao.findById(userId);
 		}
 		if (user != null) {
 			controller.setSessionAttr(WebKeys.SESSION_USER, user);
