@@ -36,9 +36,30 @@ public class Post extends Model<Post> {
 				.find("SELECT p.id,p.title,p.content,u.name,p.post_date,p.views "
 						+ "FROM post as p join user as u where p.user_id = u.id limit 10");
 		for (Record post : posts) {
+			System.out.println(getTagsHtml(post.getInt("id")));
+			post.set("tags", getTagsHtml(post.getInt("id")));
 			System.out.println(">>>>>>>>>>>" + post.toJson());
 		}
 		return posts;
+	}
+	
+	public String getTagsHtml(Integer id) {
+		StringBuilder html = new StringBuilder();
+        List<Tag> list = Tag.dao.find("select * from tag where id in("
+        		+ "select distinct(tag_id) from blog.posttag where post_id=" + id + ")");
+        if(null != list && list.size() > 0) {
+            html.append("<span class=\"mt_icon\"></span>");
+        }
+        String temp = "<a title=\"{}\" href=\"/tag/id\">{}</a>";
+        for (int i = 0; i < list.size(); i++) {
+        	Tag tag = list.get(i);
+        	String temp1 = temp.replace("id", String.valueOf(tag.getInt("id")));
+            html.append(temp1.replace("{}", tag.getStr("name")));
+            if (i != list.size() - 1 ) {
+                html.append(',');
+            }
+        }
+        return html.toString();
 	}
 
 }
