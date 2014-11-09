@@ -15,11 +15,15 @@
  */
 package cn.easy.blog.controller;
 
+import java.util.List;
+
 import cn.easy.blog.model.Category;
 import cn.easy.blog.model.Post;
 import cn.easy.blog.model.Tag;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 
 public class PostController extends Controller {
 
@@ -36,7 +40,15 @@ public class PostController extends Controller {
 	}
 
 	public void getPostsByCategory() {
-		setAttr("posts", Post.dao.find("select * from post where category_id = " + getPara()));
+		String sql = "select p.id,p.title,p.content,u.name,p.post_date,p.views "
+				+ "from post p join user u where p.user_id = u.id and category_id = " + getPara();
+		List<Record> posts = Db.find(sql.toString());
+		for (Record post : posts) {
+			System.out.println(Post.dao.getTagsHtml(post.getInt("id")));
+			post.set("tags", Post.dao.getTagsHtml(post.getInt("id")));
+			System.out.println(">>>>>>>>>>>" + post.toJson());
+		}
+		setAttr("posts", posts);
 		setAttr("tags", Tag.dao.getAll());
 		setAttr("categorys", Category.dao.getAllCategorys());
 		render("../index/index.html");
