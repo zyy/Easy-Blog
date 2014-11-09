@@ -21,4 +21,9 @@ public class User extends Model<User> {
 
 	private static final long serialVersionUID = 7927107897061864964L;
 	public static final User dao = new User();
+
+	public User getByAccount(String account) {
+		return this.findFirst("select * from user where phone=? or email=? ",
+				account, account);
+	}
 }

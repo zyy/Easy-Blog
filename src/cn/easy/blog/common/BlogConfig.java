@@ -3,8 +3,8 @@ package cn.easy.blog.common;
 import java.io.File;
 import java.util.Properties;
 
+import cn.easy.blog.controller.AdminController;
 import cn.easy.blog.controller.IndexController;
-import cn.easy.blog.controller.LoginController;
 import cn.easy.blog.controller.PostController;
 import cn.easy.blog.controller.TagController;
 import cn.easy.blog.model.Category;
@@ -20,6 +20,7 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
+import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
@@ -31,7 +32,7 @@ public class BlogConfig extends JFinalConfig {
 
 	public void configRoute(Routes routes) {
 		routes.add("/", IndexController.class, "/index");
-		routes.add("/login", LoginController.class, "/login");
+		routes.add("/admin", AdminController.class, "/admin");
 		routes.add("/post", PostController.class, "/post");
 		routes.add("/tag", TagController.class, "/tag");
 	}
@@ -56,7 +57,7 @@ public class BlogConfig extends JFinalConfig {
 	}
 
 	public void configInterceptor(Interceptors interceptors) {
-		//interceptors.add(new SessionInViewInterceptor(true));
+		interceptors.add(new SessionInViewInterceptor(true));
 		// interceptors.add(new LoginInterceptor());
 	}
 
