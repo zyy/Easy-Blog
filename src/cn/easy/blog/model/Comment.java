@@ -15,10 +15,15 @@
  */
 package cn.easy.blog.model;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Model;
 
 public class Comment extends Model<Comment> {
 
 	private static final long serialVersionUID = 1110794639161242230L;
 	public static final Comment dao = new Comment();
+	public List<Comment> getAll() {
+		return Comment.dao.find("select * from comment");
+	}
 }

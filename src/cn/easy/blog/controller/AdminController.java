@@ -6,6 +6,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import cn.easy.blog.common.WebKeys;
 import cn.easy.blog.model.Category;
+import cn.easy.blog.model.Comment;
 import cn.easy.blog.model.Post;
 import cn.easy.blog.model.Tag;
 import cn.easy.blog.model.User;
@@ -42,7 +43,8 @@ public class AdminController extends Controller {
 		}
 
 		// 添加cookie
-		setCookie(WebKeys.COOKIE_USER_ID, String.valueOf(user.getInt("id")), 60 * 60 * 24 * 30);
+		setCookie(WebKeys.COOKIE_USER_ID, String.valueOf(user.getInt("id")),
+				60 * 60 * 24 * 30);
 
 		// 如果有引用链接，回到登录前的页面，没有就去首页
 		HttpSession session = getSession();
@@ -56,11 +58,31 @@ public class AdminController extends Controller {
 		}
 		render("index.html");
 	}
-	
+
 	public void posts() {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		setAttr("posts", Post.dao.getIndexPosts());
 		setAttr("tags", Tag.dao.getAll());
 		render("post.html");
+	}
+
+	public void categorys() {
+		setAttr("categorys", Category.dao.getAllCategorys());
+		render("category.html");
+	}
+	
+	public void tags() {
+		setAttr("tags", Tag.dao.getAll());
+		render("tag.html");
+	}
+	
+	public void comments() {
+		setAttr("comments", Comment.dao.getAll());
+		render("comment.html");
+	}
+	
+	public void users() {
+		setAttr("users", User.dao.getAll());
+		render("user.html");
 	}
 }

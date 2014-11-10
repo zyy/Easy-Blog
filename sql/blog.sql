@@ -4,7 +4,7 @@ USE `blog`;
 CREATE TABLE `user` (
 `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
 `username` varchar(50) NOT NULL COMMENT '用户名',
-`sex` int(1) NULL COMMENT '性别',
+`sex` tinyint(1) NULL COMMENT '性别',
 `password` varchar(200) NOT NULL COMMENT '密码',
 `phone` varchar(50) NULL COMMENT '电话',
 `email` varchar(100) NULL COMMENT '电子邮箱',

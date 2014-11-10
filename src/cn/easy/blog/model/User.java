@@ -15,6 +15,8 @@
  */
 package cn.easy.blog.model;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Model;
 
 public class User extends Model<User> {
@@ -25,5 +27,9 @@ public class User extends Model<User> {
 	public User getByAccount(String account) {
 		return this.findFirst("select * from user where phone=? or email=? ",
 				account, account);
+	}
+	
+	public List<User> getAll() {
+		return User.dao.find("select * from user");
 	}
 }
