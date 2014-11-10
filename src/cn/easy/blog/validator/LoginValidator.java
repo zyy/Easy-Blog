@@ -1,7 +1,7 @@
 package cn.easy.blog.validator;
 
-import util.RegExpUtil;
 import cn.easy.blog.common.RegExp;
+import cn.easy.blog.util.RegExpUtil;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
