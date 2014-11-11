@@ -18,7 +18,7 @@ import com.jfinal.core.Controller;
 public class AdminController extends Controller {
 
 	public void index() {
-		posts();
+		render("login.html");
 	}
 
 	@Before(LoginValidator.class)
@@ -56,7 +56,7 @@ public class AdminController extends Controller {
 			redirect(String.valueOf(referer));
 			return;
 		}
-		render("index.html");
+		posts();
 	}
 
 	public void posts() {
