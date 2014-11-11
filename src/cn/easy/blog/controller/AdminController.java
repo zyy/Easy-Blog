@@ -18,7 +18,7 @@ import com.jfinal.core.Controller;
 public class AdminController extends Controller {
 
 	public void index() {
-		render("login.html");
+		posts();
 	}
 
 	@Before(LoginValidator.class)
@@ -63,26 +63,37 @@ public class AdminController extends Controller {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		setAttr("posts", Post.dao.getIndexPosts());
 		setAttr("tags", Tag.dao.getAll());
+		setAttr("menu", "post");
 		render("post.html");
+	}
+	
+	public void addPost() {
+		setAttr("categorys", Category.dao.getAllCategorys());
+		setAttr("menu", "post");
+		render("add_post.html");
 	}
 
 	public void categorys() {
 		setAttr("categorys", Category.dao.getAllCategorys());
+		setAttr("menu", "category");
 		render("category.html");
 	}
 	
 	public void tags() {
 		setAttr("tags", Tag.dao.getAll());
+		setAttr("menu", "tag");
 		render("tag.html");
 	}
 	
 	public void comments() {
 		setAttr("comments", Comment.dao.getAll());
+		setAttr("menu", "comment");
 		render("comment.html");
 	}
 	
 	public void users() {
 		setAttr("users", User.dao.getAll());
+		setAttr("menu", "user");
 		render("user.html");
 	}
 }

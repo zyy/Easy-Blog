@@ -61,8 +61,8 @@
         ]
 
         ,initialContent:''       //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
-        ,initialFrameWidth:710  //初始化编辑器宽度,默认1000
-        ,initialFrameHeight:200  //初始化编辑器高度,默认320
+        ,initialFrameWidth:900  //初始化编辑器宽度,默认1000
+        ,initialFrameHeight:350  //初始化编辑器高度,默认320
     };
 
     function getUEBasePath ( docUrl, confUrl ) {

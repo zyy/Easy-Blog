@@ -1,14 +1,50 @@
-<#include "_layout.html"/>
-<@layout>
-	<div class="input-group">
-		<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-		<input id="account" name="account"  type="text" class="form-control" placeholder="请输入帐号"/>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<!--[if IE ]>
+    <script type="text/javascript">alert("抱歉，系统检测到您还在使用低版本IE浏览器，请升级到最新版本或者使用其它浏览器访问。");window.close(); </script>
+<![endif]-->
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="/js/bootstrap/css/bootstrap.min.css" />
+<script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document.loginForm).validate({
+		rules : {
+			account : {
+				required : true,
+				account : true
+			}
+		}
+	});
+</script>
+<#-- base href="${CPATH}" / -->
+</head>
+<body>
+	<div class="container-fluid" style="width: 400px">
+		<h2 class="page-header text-center">EasyBlog</h2>
+		<#if msg?? >
+		<div class="alert alert-warning alert-dismissable text-center">
+			${msg}</div>
+		</#if>
+		<form class="form-horizontal" action="/admin/login" name="loginForm"
+			method="post">
+			<div class="input-group">
+				<span class="input-group-addon"><span
+					class="glyphicon glyphicon-user"></span></span> <input id="account"
+					name="account" type="text" class="form-control" placeholder="请输入账号" />
+			</div>
+			<div class="input-group" style="padding-top: 15px">
+				<span class="input-group-addon"><span
+					class="glyphicon glyphicon-lock"></span></span></span> <input id="pwd" name="pwd"
+					type="password" class="form-control" placeholder="请输入密码" />
+			</div>
+			<div class="input-group" style="padding-top: 15px">
+				<button style="width: 370px" class="btn btn-primary" type="submit"
+					id="login">登录</button>
+			</div>
+		</form>
 	</div>
-	<div class="input-group" style="padding-top: 15px">
-		<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span></span>
-		<input id="pwd" name="pwd" type="password" class="form-control" placeholder="请输入密码"/>
-	</div>
-	<div class="input-group" style="padding-top: 15px">
-		<button style="width: 370px" class="btn btn-primary" type="submit" id="login">登录</button>
-	</div>
-</@layout>
+</body>
+</html>
+
