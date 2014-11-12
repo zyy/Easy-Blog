@@ -29,23 +29,25 @@
 			<div class="filter-panel">
 				<div class="content-box-header">分类</div>
 				<div class="content-box">
-					<#if categorys?? && categorys?size gt 0> <#list categorys as
-					category>
-					<div class="checkbox">
-						<label> <input type="checkbox" value="${category.id}">${category.name}
+					<#if categorys?? && categorys?size gt 0> 
+					<#list categorys as	category>
+					<label class="radio-inline"> <input type="radio" name="post.category_id" value="${category.id}">${category.name}
 						</label>
-					</div>
-					</#list> </#if>
+					</#list> 
+					</#if>
 				</div>
 			</div>
 			<div class="filter-panel" style="margin-top: 15px">
 				<div class="content-box-header">标签</div>
 				<div class="content-box">
-					<div class="row form-inline" style="margin-left: 5px">
-						<input type="text" class="form-control" name="post.tagId" />
-						<button class="btn btn-primary" type="submit">添加</button>
+					<#if tags?? && tags?size gt 0> 
+					<#list tags as tag>
+					<div class="checkbox">
+						<label> <input type="checkbox" name="tagId" value="${tag.id}">${tag.name}
+						</label>
 					</div>
-					<h5>多个标签用英文逗号隔开(,)</h5>
+					</#list> 
+					</#if>
 				</div>
 			</div>
 		</div>

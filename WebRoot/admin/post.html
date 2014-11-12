@@ -6,6 +6,22 @@
 		<label for="search-project-name" class="sr-only">用户名称搜索</label>
 		<input id="search-project-name" type="text" class="form-control" name="name" value="${name!}" placeholder="输入项目名称" maxlength="30"/>	
 	</div>
+	<div class="dropdown form-group">
+	    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">分类选择
+	    <span class="caret"></span>
+	    </button>
+		<div class="dropdown-menu">
+			<#if categorys?? && categorys?size gt 0>
+			<#list categorys as category>
+				<div class="checkbox"  role="menuitem">
+					<label>
+						<input type="checkbox" name="status" value="${category.id}"/>&nbsp;${category.name}						
+					</label>
+				</div>
+			</#list>
+			</#if>
+		</div>
+	</div> 
 	<button class="btn btn-default" type="submit">
 		<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
 	</button>
@@ -15,7 +31,7 @@
 </form>
 <#if posts?? && posts?size gt 0>
 	<div class="table-responsive">
-	<table class="table table-hover table-striped table-bordered">
+	<table class="table table-hover table-striped table-bordered" style="margin-top: 15px">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -24,6 +40,7 @@
 				<th>日期</th>
 				<th>分类</th>
 				<th>浏览量</th>
+				<th>#</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,6 +52,11 @@
 				<td>${post.post_date}</td>
 				<td>${post.id}</td>
 				<td>${post.views}</td>
+				<td>
+					<a href="/admin/updatePost"><span class="glyphicon glyphicon-edit"></span></a>
+					<a href="/admin/updateDel"><span class="glyphicon glyphicon-remove"></span></a>
+					<a href="/admin/updateDel"><span class="glyphicon glyphicon-trash"></span></a>
+				</td>
 			</tr>
 			</#list>
 		</tbody>
