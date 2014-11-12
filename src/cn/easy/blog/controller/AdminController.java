@@ -96,4 +96,11 @@ public class AdminController extends Controller {
 		setAttr("menu", "user");
 		render("user.html");
 	}
+	
+	public void savePost() {
+		Post task = getModel(Post.class);
+		System.out.println(task.toJson());
+		String tag = getPara("tagID");
+		System.out.println(tag);
+	}
 }

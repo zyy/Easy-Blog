@@ -1,22 +1,22 @@
-<#include "_layout.html"/> <@layout>
+<#include "_layout.html"/> 
+<@layout>
 <div class="row">
-	<div class="col-md-9">
-		<form class="form-horizontal" role="form" style="margin-bottom: 0;"
-			action="" method="post" name="addProjectForm">
+	<form class="form-horizontal" role="form" style="margin-bottom: 0;"
+		action="/admin/savePost" method="post" name="addPostForm">
+		<div class="col-md-9">
 			<div class="form-group">
-				<label class="col-md-1 control-label" for="ipt-project-name">名称:</label>
+				<label class="col-md-1 control-label">名称:</label>
 				<div class="col-md-11">
-					<input type="text" minlength="2" maxlength="60"
-						id="ipt-project-name" name="project.name" class="form-control"
-						placeholder="60字以内" required />
+					<input id="title" name="post.title" type="text" maxlength="60"
+						class="form-control" placeholder="60字以内" required />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-md-1 control-label" for="textarea-project-intro">简介:</label>
+				<label class="col-md-1 control-label">简介:</label>
 				<div class="col-md-11">
-					<textarea id="container"></textarea>
+					<textarea id="content" name="post.content" required></textarea>
 					<script type="text/javascript">
-						var ue = UE.getEditor('container');
+						var ue = UE.getEditor('content');
 					</script>
 				</div>
 			</div>
@@ -24,33 +24,31 @@
 				<button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
 				<button class="btn btn-primary" type="submit">保存</button>
 			</div>
-		</form>
-	</div>
-	<div class="col-md-3">
-		<div class="col-md-12" style="background-color: #f8f8f8;">
-			<div class="list-group" id="user-menu">
-				<h4>分类</h4>
-				<hr />
-				<#if categorys?? && categorys?size gt 0> <#list categorys as
-				category>
-				<div class="checkbox">
-					<label> <input type="checkbox" value="${category.id}">${category.name}
-					</label>
+		</div>
+		<div class="col-md-3">
+			<div class="filter-panel">
+				<div class="content-box-header">分类</div>
+				<div class="content-box">
+					<#if categorys?? && categorys?size gt 0> <#list categorys as
+					category>
+					<div class="checkbox">
+						<label> <input type="checkbox" value="${category.id}">${category.name}
+						</label>
+					</div>
+					</#list> </#if>
 				</div>
-				</#list> </#if>
+			</div>
+			<div class="filter-panel" style="margin-top: 15px">
+				<div class="content-box-header">标签</div>
+				<div class="content-box">
+					<div class="row form-inline" style="margin-left: 5px">
+						<input type="text" class="form-control" name="post.tagId" />
+						<button class="btn btn-primary" type="submit">添加</button>
+					</div>
+					<h5>多个标签用英文逗号隔开(,)</h5>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-12"
-			style="background-color: #f8f8f8; margin-top: 20px">
-			<h4>标签</h4>
-			<hr />
-			<div class="input-group">
-			<input type="text" class="form-control" />
-			<button class="btn btn-primary" type="submit">添加</button>
-			</div>
-			<hr />
-			<h5>多个标签用英文逗号隔开(,)</h5>
-		</div>
-	</div>
+	</form>
 </div>
 </@layout>
