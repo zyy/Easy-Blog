@@ -52,9 +52,8 @@ public class LoginInterceptor implements Interceptor {
 			controller.setSessionAttr(WebKeys.SESSION_REFERER,
 					request.getRequestURL() + queryString);
 		}
-		ai.getController().redirect("/");
+		ai.getController().redirect("/admin");
 		return;
-
 	}
 
 }

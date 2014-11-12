@@ -4,23 +4,53 @@
 <form class="form-inline" role="form" action="" name="projectListForm">
 	<div class="form-group">
 		<label for="search-project-name" class="sr-only">用户名称搜索</label>
-		<input id="search-project-name" type="text" class="form-control" name="name" value="${name!}" placeholder="输入项目名称" maxlength="30"/>	
+		<input id="search-project-name" type="text" class="form-control" name="name" value="${name!}" placeholder="输入文章标题" maxlength="30"/>	
 	</div>
 	<div class="dropdown form-group">
 	    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">分类选择
 	    <span class="caret"></span>
 	    </button>
-		<div class="dropdown-menu">
+		<ul class="dropdown-menu" role="menu">
 			<#if categorys?? && categorys?size gt 0>
 			<#list categorys as category>
-				<div class="checkbox"  role="menuitem">
+			<li>
+				<div class="checkbox"  role="menuitem" style="margin-left: 10px">
 					<label>
 						<input type="checkbox" name="status" value="${category.id}"/>&nbsp;${category.name}						
 					</label>
 				</div>
+			</li>
 			</#list>
 			</#if>
-		</div>
+		</ul>
+	</div> 
+	<div class="dropdown form-group">
+	    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">状态选择
+	    <span class="caret"></span>
+	    </button>
+		<ul class="dropdown-menu" role="menu">
+			<li>
+				<div class="checkbox"  role="menuitem" style="margin-left: 10px">
+					<label>
+						<input type="checkbox" name="status" value="post.stat"/>&nbsp;发布						
+					</label>
+				</div>
+			</li>
+			<li>
+				<div class="checkbox"  role="menuitem" style="margin-left: 10px">
+					<label>
+						<input type="checkbox" name="status" value="post.stat"/>&nbsp;草稿						
+					</label>
+				</div>
+			</li>
+			<li>
+				<div class="checkbox" role="menuitem" style="margin-left: 10px">
+					<label>
+						<input type="checkbox" name="status" value="post.stat"/>&nbsp;回收箱						
+					</label>
+				</div>
+			</li>
+		</ul>
 	</div> 
 	<button class="btn btn-default" type="submit">
 		<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
@@ -61,6 +91,9 @@
 			</#list>
 		</tbody>
 	</table>
+	</div>
+	<div align="right">
+		${pageLink}
 	</div>
 <#else>
 <div class="alert alert-warning">无可显示数据</div>

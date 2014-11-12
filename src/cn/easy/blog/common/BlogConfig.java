@@ -7,6 +7,7 @@ import cn.easy.blog.controller.AdminController;
 import cn.easy.blog.controller.IndexController;
 import cn.easy.blog.controller.PostController;
 import cn.easy.blog.controller.TagController;
+import cn.easy.blog.interceptor.LoginInterceptor;
 import cn.easy.blog.model.Category;
 import cn.easy.blog.model.Comment;
 import cn.easy.blog.model.Post;
@@ -58,7 +59,7 @@ public class BlogConfig extends JFinalConfig {
 
 	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new SessionInViewInterceptor(true));
-		// interceptors.add(new LoginInterceptor());
+		interceptors.add(new LoginInterceptor());
 	}
 
 	public void configHandler(Handlers handlers) {

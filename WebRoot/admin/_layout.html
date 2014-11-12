@@ -42,6 +42,9 @@
 						<span class="glyphicon glyphicon-user"></span>${session.user.name}
 					</strong>
 				</li>
+				<li>
+	      			<a href="javascript:showConfirm({title:'退出Easy Blog',content:'确定要退出系统吗？',ensure:function(){location='/admin/logout'}});">退出</a>
+	    		</li>
 			</ul>
 			</nav>
 		</div>
