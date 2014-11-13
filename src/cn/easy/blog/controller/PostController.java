@@ -21,10 +21,13 @@ import cn.easy.blog.model.Category;
 import cn.easy.blog.model.Post;
 import cn.easy.blog.model.Tag;
 
+import com.jfinal.aop.ClearInterceptor;
+import com.jfinal.aop.ClearLayer;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+@ClearInterceptor(ClearLayer.ALL)
 public class PostController extends Controller {
 
 	public void postInfo() {
@@ -32,7 +35,6 @@ public class PostController extends Controller {
 		post.set("views", (Integer)post.get("views") + 1);
 		post.update();
 		setAttr("post", post);
-		System.out.println(Post.dao.findById(getPara()).toJson());
 		setAttr("tags", Tag.dao.getAll());
 		setAttr("categorys", Category.dao.getAllCategorys());
 		Post.dao.getIndexPosts();

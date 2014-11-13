@@ -83,9 +83,9 @@
 				<td>${post.id}</td>
 				<td>${post.views}</td>
 				<td>
-					<a href="/admin/updatePost"><span class="glyphicon glyphicon-edit"></span></a>
-					<a href="/admin/updateDel"><span class="glyphicon glyphicon-remove"></span></a>
-					<a href="/admin/updateDel"><span class="glyphicon glyphicon-trash"></span></a>
+					<a href="/admin/updatePost"><span class="glyphicon glyphicon-edit"></span>修改</a>
+					<a href="javascript:showConfirm({title:'删除文章',content:'确定要删除该文章？',ensure:function(){location='/admin/deletePost/${post.id}'}});"><span class="glyphicon glyphicon-remove"></span>删除</a>
+					<a href="/admin/trashPost"><span class="glyphicon glyphicon-trash"></span>回收箱</a>
 				</td>
 			</tr>
 			</#list>

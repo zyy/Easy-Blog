@@ -19,8 +19,11 @@ import cn.easy.blog.model.Category;
 import cn.easy.blog.model.Post;
 import cn.easy.blog.model.Tag;
 
+import com.jfinal.aop.ClearInterceptor;
+import com.jfinal.aop.ClearLayer;
 import com.jfinal.core.Controller;
 
+@ClearInterceptor(ClearLayer.ALL)
 public class IndexController extends Controller {
 	public void index() {
 		setAttr("categorys", Category.dao.getAllCategorys());

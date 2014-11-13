@@ -1,11 +1,5 @@
 package cn.easy.blog.util;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 

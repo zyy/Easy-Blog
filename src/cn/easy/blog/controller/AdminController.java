@@ -21,12 +21,17 @@ import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.aop.ClearLayer;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class AdminController extends Controller {
 
 	@ClearInterceptor(ClearLayer.ALL)
 	public void index() {
-		render("login.html");
+		if (getSessionAttr(WebKeys.SESSION_USER) != null) {
+			posts();
+		} else {
+			render("login.html");
+		}
 	}
 
 	@ClearInterceptor(ClearLayer.ALL)
@@ -66,6 +71,13 @@ public class AdminController extends Controller {
 			return;
 		}
 		posts();
+	}
+
+	@ClearInterceptor(ClearLayer.ALL)
+	public void logout() {
+		getSession().invalidate();
+		removeCookie(WebKeys.COOKIE_USER_ID);
+		index();
 	}
 
 	public void posts() {
@@ -111,6 +123,7 @@ public class AdminController extends Controller {
 		render("user.html");
 	}
 
+	@Before(Tx.class)
 	public void savePost() {
 		User sessionUser = getSessionAttr(WebKeys.SESSION_USER);
 		Post post = getModel(Post.class);
@@ -128,6 +141,15 @@ public class AdminController extends Controller {
 			}
 		}
 
+		posts();
+	}
+
+	@Before(Tx.class)
+	public void deletePost() {
+		String postId = getPara();
+		PostTag.dao.delByPostId(postId);
+		Comment.dao.delByPostId(postId);
+		Post.dao.deleteById(postId);
 		posts();
 	}
 }

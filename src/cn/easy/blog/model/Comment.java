@@ -17,6 +17,7 @@ package cn.easy.blog.model;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 
 public class Comment extends Model<Comment> {
@@ -25,5 +26,8 @@ public class Comment extends Model<Comment> {
 	public static final Comment dao = new Comment();
 	public List<Comment> getAll() {
 		return Comment.dao.find("select * from comment");
+	}
+	public void delByPostId(String postId) {
+		Db.update("delete from comment where post_id = " + postId);
 	}
 }

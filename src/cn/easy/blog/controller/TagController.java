@@ -7,10 +7,13 @@ import cn.easy.blog.model.Post;
 import cn.easy.blog.model.PostTag;
 import cn.easy.blog.model.Tag;
 
+import com.jfinal.aop.ClearInterceptor;
+import com.jfinal.aop.ClearLayer;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+@ClearInterceptor(ClearLayer.ALL)
 public class TagController extends Controller {
 	public void index() {
 		StringBuilder sql = new StringBuilder("SELECT p.id,p.title,p.content,u.name,p.post_date,p.views "

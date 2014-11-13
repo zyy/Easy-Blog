@@ -17,6 +17,7 @@ package cn.easy.blog.model;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 
 public class PostTag extends Model<PostTag> {
@@ -26,5 +27,9 @@ public class PostTag extends Model<PostTag> {
 	
 	public List<PostTag> getPostIdByTagId(String tagId){
 		return PostTag.dao.find("select distinct(post_id) from posttag where tag_id = " + tagId);
+	}
+	
+	public void delByPostId(String postId) {
+		Db.update("delete from posttag where post_id = " + postId);
 	}
 }
