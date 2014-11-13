@@ -1,0 +1,73 @@
+<#include "_layout.html"/> 
+<@layout>
+<div class="row">
+	<form class="form-horizontal" role="form" style="margin-bottom: 0;"
+		action="/admin/updatePost/${post.id}" method="post" name="addPostForm">
+		<div class="col-md-9">
+			<div class="form-group">
+				<label class="col-md-1 control-label">名称:</label>
+				<div class="col-md-11">
+					<input id="title" name="post.title" type="text" maxlength="60"
+						class="form-control" placeholder="60字以内" required value="${post.title}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-1 control-label">简介:</label>
+				<div class="col-md-11">
+					<textarea id="content" name="post.content" required>${post.content}</textarea>
+					<script type="text/javascript">
+						var ue = UE.getEditor('content');
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="filter-panel">
+				<div class="content-box-header">分类</div>
+				<div class="content-box">
+					<#if categorys?? && categorys?size gt 0> 
+					<#list categorys as	category>
+					<label class="radio-inline"> 
+					<#if post.category_id==category.id> 
+						<input type="radio" checked="checked" name="post.category_id" value="${category.id}">${category.name}
+					<#else>
+						<input type="radio" name="post.category_id" value="${category.id}">${category.name}
+					</#if>
+					</label>
+					</#list> 
+					</#if>
+				</div>
+			</div>
+			<div class="filter-panel" style="margin-top: 15px">
+				<div class="content-box-header">标签</div>
+				<div class="content-box">
+					<#if tags?? && tags?size gt 0> 
+					<#list tags as tag>
+					<div class="checkbox">
+						<label> 
+						<#if tagIds?contains(tag.id?c)>
+							<input type="checkbox" checked="checked" name="tagId" value="${tag.id}">${tag.name}
+						<#else>
+							<input type="checkbox" name="tagId" value="${tag.id}">${tag.name}
+						</#if>
+						</label>
+					</div>
+					</#list> 
+					</#if>
+				</div>
+			</div>
+			<div class="filter-panel" style="margin-top: 15px">
+				<div class="content-box-header">发布</div>
+				<div class="content-box">
+				<button class="btn btn-primary" type="submit">保存为草稿</button>
+				<button class="btn btn-primary" type="submit">回收箱</button>
+				<button class="btn btn-primary" type="submit">更新</button>
+				</div>
+			</div>
+			<#if msg??>
+			<div class="alert alert-warning">${msg}</div>
+			</#if>
+		</div>
+	</form>
+</div>
+</@layout>

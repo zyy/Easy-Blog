@@ -32,4 +32,8 @@ public class PostTag extends Model<PostTag> {
 	public void delByPostId(String postId) {
 		Db.update("delete from posttag where post_id = " + postId);
 	}
+	
+	public List<PostTag> getPostTagsByPostId(String postId) {
+		return PostTag.dao.find("select * from posttag where post_id = " + postId);
+	}
 }

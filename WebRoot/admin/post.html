@@ -64,13 +64,13 @@
 	<table class="table table-hover table-striped table-bordered" style="margin-top: 15px">
 		<thead>
 			<tr>
-				<th>#</th>
-				<th>标题</th>
-				<th>作者</th>
-				<th>日期</th>
-				<th>分类</th>
-				<th>浏览量</th>
-				<th>#</th>
+				<th width="5%">#</th>
+				<th width="30%">标题</th>
+				<th width="10%">作者</th>
+				<th width="15%">日期</th>
+				<th width="10%">分类</th>
+				<th width="10%">浏览量</th>
+				<th width="20%">#</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -80,12 +80,12 @@
 				<td>${post.title}</td>
 				<td>${post.name}</td>
 				<td>${post.post_date}</td>
-				<td>${post.id}</td>
+				<td>${post.cate_name}</td>
 				<td>${post.views}</td>
 				<td>
-					<a href="/admin/updatePost"><span class="glyphicon glyphicon-edit"></span>修改</a>
+					<a href="/admin/showPost/${post.id}"><span class="glyphicon glyphicon-edit"></span>修改</a>
 					<a href="javascript:showConfirm({title:'删除文章',content:'确定要删除该文章？',ensure:function(){location='/admin/deletePost/${post.id}'}});"><span class="glyphicon glyphicon-remove"></span>删除</a>
-					<a href="/admin/trashPost"><span class="glyphicon glyphicon-trash"></span>回收箱</a>
+					<a href="/admin/trashPost/${post.id}"><span class="glyphicon glyphicon-trash"></span>回收箱</a>
 				</td>
 			</tr>
 			</#list>
