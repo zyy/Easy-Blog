@@ -18,17 +18,18 @@ td.intro{
 		<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
 	</button>
 	<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#add-project-modal">
-		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加新项目
+		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加新标签
 	</button>
 </form>
 <#if tags?? && tags?size gt 0>
 	<div class="table-responsive">
-	<table class="table table-hover">
+	<table class="table table-hover table-striped table-bordered" style="margin-top: 15px">
 		<thead>
 			<tr>
-				<th>#</th>
-				<th>名称</th>
-				<th>文章数</th>
+				<th width="20%">#</th>
+				<th width="30%">名称</th>
+				<th width="30%">文章数</th>
+				<th width="20%">#</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,6 +38,10 @@ td.intro{
 				<td>${tag.id}</td>
 				<td>${tag.name}</td>
 				<td>${tag.count}</td>
+				<td>
+					<a href="/admin/showTag/${tag.id}"><span class="glyphicon glyphicon-edit"></span>修改</a>
+					<a href="javascript:showConfirm({title:'删除标签',content:'确定要删除该文章？',ensure:function(){location='/admin/deleteTag/${tag.id}'}});"><span class="glyphicon glyphicon-remove"></span>删除</a>
+				</td>
 			</tr>
 			</#list>
 		</tbody>

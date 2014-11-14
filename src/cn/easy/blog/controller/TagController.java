@@ -27,9 +27,7 @@ public class TagController extends Controller {
 		sql.append(")");
 		List<Record> posts = Db.find(sql.toString());
 		for (Record post : posts) {
-			System.out.println(Post.dao.getTagsHtml(post.getInt("id")));
 			post.set("tags", Post.dao.getTagsHtml(post.getInt("id")));
-			System.out.println(">>>>>>>>>>>" + post.toJson());
 		}
 		setAttr("posts", posts);
 		setAttr("tags", Tag.dao.getAll());

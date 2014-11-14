@@ -1,33 +1,35 @@
-<#include "_layout.html"/>
-<@layout>
+<#include "_layout.html"/> <@layout>
 <style type="text/css">
-td.intro{
+td.intro {
 	max-width: 200px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	cursor:default;
+	cursor: default;
 }
 </style>
 <form class="form-inline" role="form" action="" name="projectListForm">
 	<div class="form-group">
-		<label for="search-project-name" class="sr-only">用户名称搜索</label>
-		<input id="search-project-name" type="text" class="form-control" name="name" value="${name!}" placeholder="输入项目名称" maxlength="30"/>	
+		<label for="search-project-name" class="sr-only">用户名称搜索</label> <input
+			id="search-project-name" type="text" class="form-control" name="name"
+			value="${name!}" placeholder="输入项目名称" maxlength="30" />
 	</div>
 	<button class="btn btn-default" type="submit">
 		<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
 	</button>
-	<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#add-project-modal">
-		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加新项目
+	<button class="btn btn-warning" type="button" data-toggle="modal"
+		data-target="#add-project-modal">
+		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加新分类
 	</button>
 </form>
 <#if categorys?? && categorys?size gt 0>
-	<div class="table-responsive">
-	<table class="table table-hover">
+<div class="table-responsive">
+	<table class="table table-hover table-striped table-bordered" style="margin-top: 15px">
 		<thead>
 			<tr>
-				<th>#</th>
-				<th>名称</th>
+				<th width="20%">#</th>
+				<th width="40%">名称</th>
+				<th width="40%">#</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,11 +37,16 @@ td.intro{
 			<tr>
 				<td>${category.id}</td>
 				<td>${category.name}</td>
+				<td>
+					<a href="/admin/showCategory/${category.id}"><span class="glyphicon glyphicon-edit"></span>修改</a>
+					<a href="javascript:showConfirm({title:'删除分类',content:'确定要删除该分类？',ensure:function(){location='/admin/deleteCategory/${category.id}'}});">
+					<span class="glyphicon glyphicon-remove"></span>删除</a>
+				</td>
 			</tr>
 			</#list>
 		</tbody>
 	</table>
-	</div>
+</div>
 <#else>
 <div class="alert alert-warning">无可显示数据</div>
 </#if>

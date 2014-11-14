@@ -65,19 +65,33 @@
 		<thead>
 			<tr>
 				<th width="5%">#</th>
-				<th width="30%">标题</th>
+				<th width="20%">标题</th>
+				<th width="20%">内容</th>
 				<th width="10%">作者</th>
 				<th width="15%">日期</th>
-				<th width="10%">分类</th>
-				<th width="10%">浏览量</th>
-				<th width="20%">#</th>
+				<th width="7%">分类</th>
+				<th width="8%">浏览量</th>
+				<th width="15%">#</th>
 			</tr>
 		</thead>
 		<tbody>
 			<#list posts as post >
 			<tr>
 				<td>${post.id}</td>
-				<td>${post.title}</td>
+				<td>
+					<#if post.title?length gt 15>
+					 ${post.title?substring(0, 14)}...
+					<#else>
+					 ${post.title}
+					</#if>
+				</td>
+				<td>
+					<#if post.content?length gt 15>
+					 ${post.content?substring(0, 14)}...
+					<#else>
+					 ${post.content}
+					</#if>
+				</td>
 				<td>${post.name}</td>
 				<td>${post.post_date}</td>
 				<td>${post.cate_name}</td>

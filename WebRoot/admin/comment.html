@@ -12,18 +12,15 @@ td.intro{
 <form class="form-inline" role="form" action="" name="projectListForm">
 	<div class="form-group">
 		<label for="search-project-name" class="sr-only">用户名称搜索</label>
-		<input id="search-project-name" type="text" class="form-control" name="name" value="${name!}" placeholder="输入项目名称" maxlength="30"/>	
+		<input id="search-project-name" type="text" class="form-control" name="name" value="${name!}" placeholder="输入评论内容" maxlength="30"/>	
 	</div>
 	<button class="btn btn-default" type="submit">
 		<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
 	</button>
-	<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#add-project-modal">
-		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加新项目
-	</button>
 </form>
 <#if comments?? && comments?size gt 0>
 	<div class="table-responsive">
-	<table class="table table-hover">
+	<table class="table table-hover table-striped table-bordered" style="margin-top: 15px">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -31,6 +28,7 @@ td.intro{
 				<th>文章</th>
 				<th>用户</th>
 				<th>日期</th>
+				<th>#</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,6 +39,10 @@ td.intro{
 				<td>${comment.post_id}</td>
 				<td>${comment.user_id}</td>
 				<td>${comment.comment_date}</td>
+				<td>
+					<a href="/admin/showComment/${comment.id}"><span class="glyphicon glyphicon-edit"></span>修改</a>
+					<a href="javascript:showConfirm({title:'删除评论',content:'确定要删除该评论？',ensure:function(){location='/admin/deleteComment/${comment.id}'}});"><span class="glyphicon glyphicon-remove"></span>删除</a>
+				</td>
 			</tr>
 			</#list>
 		</tbody>

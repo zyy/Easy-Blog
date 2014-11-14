@@ -50,8 +50,6 @@ public class AdminController extends Controller {
 			return;
 		}
 
-		System.out.println(">>>>>>>>>> pwd " + DigestUtils.md5Hex(pwd));
-
 		if (!user.getStr("password").equals(DigestUtils.md5Hex(pwd))) {
 			setAttr("msg", "帐号或者密码错误");
 			index();
@@ -64,7 +62,6 @@ public class AdminController extends Controller {
 
 		// 如果有引用链接，回到登录前的页面，没有就去首页
 		HttpSession session = getSession();
-		System.out.println(">>>>>>>>." + session);
 		session.setAttribute(WebKeys.SESSION_USER, user);
 		Object referer = session.getAttribute(WebKeys.SESSION_REFERER);
 		if (referer != null) {

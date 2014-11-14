@@ -3,7 +3,7 @@ package cn.easy.blog.common;
 /**
  * 放置共用的常量
  */
-public class WebKeys {
+public interface WebKeys {
 	public final static String SESSION_USER = "user";
 	public final static String SESSION_REFERER = "session_referer";
 	public final static String REQUEST_MESSAGE = "message";
