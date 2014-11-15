@@ -192,4 +192,11 @@ public class AdminController extends Controller {
 		setAttr("msg", "修改成功!");
 		redirect("/admin/showPost/" + postId);;
 	}
+	
+	public void addTag() {
+		setAttr("categorys", Category.dao.getAllCategorys());
+		setAttr("tags", Tag.dao.getAll());
+		setAttr("menu", "tag");
+		render("add_tag.html");
+	}
 }
