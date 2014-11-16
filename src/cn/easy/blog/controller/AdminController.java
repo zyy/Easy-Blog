@@ -199,4 +199,10 @@ public class AdminController extends Controller {
 		setAttr("menu", "tag");
 		render("add_tag.html");
 	}
+	
+	public void saveTag() {
+		Tag tag = getModel(Tag.class);
+		tag.save();
+		tags();
+	}
 }
