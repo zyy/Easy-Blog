@@ -81,10 +81,13 @@ public class AdminController extends Controller {
 
 	public void posts() {
 		setAttr("categorys", Category.dao.getAllCategorys());
-		Page<Post> page = Post.dao.paginate(PageKit.getPn(this), 10,
-				"SELECT p.id,p.title,p.content,c.name as cate_name,u.name,p.post_date,p.views ",
-				"FROM post as p join user as u join category as c where p.user_id = u.id and "
-				+ "c.id = p.category_id order by p.id asc");
+		Page<Post> page = Post.dao
+				.paginate(
+						PageKit.getPn(this),
+						10,
+						"SELECT p.id,p.title,p.content,c.name as cate_name,u.name,p.post_date,p.views ",
+						"FROM post as p join user as u join category as c where p.user_id = u.id and "
+								+ "c.id = p.category_id order by p.id asc");
 		setAttr("pageLink", PageKit.generateHTML("/admin/posts", page));
 		setAttr("posts", page.getList());
 		setAttr("tags", Tag.dao.getAll());
@@ -166,16 +169,16 @@ public class AdminController extends Controller {
 		setAttr("menu", "post");
 		render("edit_post.html");
 	}
-	
+
 	@Before(Tx.class)
 	public void updatePost() {
 		String postId = getPara();
 		Post post = getModel(Post.class);
 		post.set("id", postId);
-		
+
 		// 删除标签关联
 		PostTag.dao.delByPostId(postId);
-		
+
 		// 保存新的标签关联
 		String[] tags = getParaValues("tagId");
 		if (tags != null) {
@@ -186,20 +189,36 @@ public class AdminController extends Controller {
 				pt.save();
 			}
 		}
-		
+
 		// 更新标题，内容，分类
 		post.update();
 		setAttr("msg", "修改成功!");
-		redirect("/admin/showPost/" + postId);;
+		redirect("/admin/showPost/" + postId);
 	}
-	
+
 	public void addTag() {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		setAttr("tags", Tag.dao.getAll());
 		setAttr("menu", "tag");
 		render("add_tag.html");
 	}
+
+	public void showTag() {
+		setAttr("categorys", Category.dao.getAllCategorys());
+		setAttr("tags", Tag.dao.getAll());
+		setAttr("menu", "tag");
+		setAttr("tag", Tag.dao.findById(getPara()));
+		render("edit_tag.html");
+	}
 	
+	public void updateTag() {
+		String tagId = getPara();
+		Tag tag = getModel(Tag.class);
+		tag.set("id", tagId);
+		tag.update();
+		tags();
+	}
+
 	public void saveTag() {
 		Tag tag = getModel(Tag.class);
 		tag.save();
