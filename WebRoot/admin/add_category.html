@@ -1,0 +1,19 @@
+<#include "_layout.html"/> <@layout>
+<div class="row">
+	<form class="form-horizontal" role="form" style="margin-bottom: 0;"
+		action="/admin/saveCategory" method="post" name="addTagForm">
+		<div class="col-md-7">
+			<div class="form-group">
+				<label class="col-md-2 control-label">名称:</label>
+				<div class="col-md-10">
+					<input id="title" name="category.name" type="text" maxlength="8"
+						class="form-control" placeholder="名称在8个字以内" required />
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<button class="btn btn-primary" type="submit">保存</button>
+		</div>
+	</form>
+</div>
+</@layout>

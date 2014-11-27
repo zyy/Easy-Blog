@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2011-2014, yycoder 692895299@qq.com
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package cn.easy.blog.controller;
 
 import java.util.ArrayList;
@@ -27,6 +42,9 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class AdminController extends Controller {
 
+	/**
+	 * 登录界面
+	 */
 	@ClearInterceptor(ClearLayer.ALL)
 	public void index() {
 		if (getSessionAttr(WebKeys.SESSION_USER) != null) {
@@ -36,6 +54,9 @@ public class AdminController extends Controller {
 		}
 	}
 
+	/**
+	 * 登录验证
+	 */
 	@ClearInterceptor(ClearLayer.ALL)
 	@Before(LoginValidator.class)
 	public void login() {
@@ -72,6 +93,9 @@ public class AdminController extends Controller {
 		posts();
 	}
 
+	/**
+	 * 登出
+	 */
 	@ClearInterceptor(ClearLayer.ALL)
 	public void logout() {
 		getSession().invalidate();
@@ -79,6 +103,9 @@ public class AdminController extends Controller {
 		index();
 	}
 
+	/**
+	 * 博文页面
+	 */
 	public void posts() {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		Page<Post> page = Post.dao
@@ -95,6 +122,9 @@ public class AdminController extends Controller {
 		render("post.html");
 	}
 
+	/**
+	 *添加博文重定向
+	 */
 	public void addPost() {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		setAttr("tags", Tag.dao.getAll());
@@ -102,30 +132,45 @@ public class AdminController extends Controller {
 		render("add_post.html");
 	}
 
+	/**
+	 * 分类页面
+	 */
 	public void categorys() {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		setAttr("menu", "category");
 		render("category.html");
 	}
 
+	/**
+	 * 标签页面
+	 */
 	public void tags() {
 		setAttr("tags", Tag.dao.getAll());
 		setAttr("menu", "tag");
 		render("tag.html");
 	}
 
+	/**
+	 * 评论
+	 */
 	public void comments() {
 		setAttr("comments", Comment.dao.getAll());
 		setAttr("menu", "comment");
 		render("comment.html");
 	}
 
+	/**
+	 * 用户界面
+	 */
 	public void users() {
 		setAttr("users", User.dao.getAll());
 		setAttr("menu", "user");
 		render("user.html");
 	}
 
+	/**
+	 * 保存博文
+	 */
 	@Before(Tx.class)
 	public void savePost() {
 		User sessionUser = getSessionAttr(WebKeys.SESSION_USER);
@@ -146,6 +191,9 @@ public class AdminController extends Controller {
 		posts();
 	}
 
+	/**
+	 * 删除博文
+	 */
 	@Before(Tx.class)
 	public void deletePost() {
 		String postId = getPara();
@@ -155,6 +203,9 @@ public class AdminController extends Controller {
 		posts();
 	}
 
+	/**
+	 * 更新博文重定向
+	 */
 	public void showPost() {
 		String postId = getPara();
 		setAttr("post", Post.dao.findById(postId));
@@ -170,6 +221,9 @@ public class AdminController extends Controller {
 		render("edit_post.html");
 	}
 
+	/**
+	 * 跟新博文
+	 */
 	@Before(Tx.class)
 	public void updatePost() {
 		String postId = getPara();
@@ -196,6 +250,9 @@ public class AdminController extends Controller {
 		redirect("/admin/showPost/" + postId);
 	}
 
+	/**
+	 * 添加标签重定向
+	 */
 	public void addTag() {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		setAttr("tags", Tag.dao.getAll());
@@ -203,6 +260,9 @@ public class AdminController extends Controller {
 		render("add_tag.html");
 	}
 
+	/**
+	 * 更新标签重定向
+	 */
 	public void showTag() {
 		setAttr("categorys", Category.dao.getAllCategorys());
 		setAttr("tags", Tag.dao.getAll());
@@ -210,7 +270,10 @@ public class AdminController extends Controller {
 		setAttr("tag", Tag.dao.findById(getPara()));
 		render("edit_tag.html");
 	}
-	
+
+	/**
+	 * 更新标签
+	 */
 	public void updateTag() {
 		String tagId = getPara();
 		Tag tag = getModel(Tag.class);
@@ -219,9 +282,31 @@ public class AdminController extends Controller {
 		tags();
 	}
 
+	/**
+	 * 保存标签
+	 */
 	public void saveTag() {
 		Tag tag = getModel(Tag.class);
 		tag.save();
 		tags();
+	}
+
+	/**
+	 * 添加分类action
+	 */
+	public void addCategory() {
+		setAttr("categorys", Category.dao.getAllCategorys());
+		setAttr("tags", Tag.dao.getAll());
+		setAttr("menu", "category");
+		render("add_category.html");
+	}
+	
+	/**
+	 * 保存分类
+	 */
+	public void saveCategory() {
+		Category category = getModel(Category.class);
+		category.save();
+		categorys();
 	}
 }
